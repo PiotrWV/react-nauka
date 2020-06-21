@@ -2,62 +2,64 @@ import React from 'react';
 import styles from './Creator.scss';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
+import { settings } from '../../data/dataStore.js';
 
 class Creator extends React.Component {
   static propTypes = {
     text: PropTypes.string,
-  }
+    action: PropTypes.func,
+  };
 
   static defaultProps = {
-    text: 'Add new item',
-  }
+    text: settings.creator.defaultText,
+  };
 
   state = {
     value: '',
     visibleButtons: false,
-  }
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     // console.log(event);
     this.setState({
       value: event.target.value,
-      visibleButtons: event.target.value.length > 0
+      visibleButtons: event.target.value.length > 0,
     });
-  }
+  };
 
   handleOK = () => {
-    if(this.state.value != ''){
+    if (this.state.value != '') {
       this.props.action(this.state.value);
       this.setState({
         value: '',
-        visibleButtons: false
+        visibleButtons: false,
       });
     }
-  }
+  };
 
   handleCancel = () => {
     this.setState({
       value: '',
-      visibleButtons: false
+      visibleButtons: false,
     });
-  }
+    
+    window.confirm(settings.creator.confirmationText);
+  };
 
   render() {
     return (
       <div className={styles.component}>
         <input
-          type='text'
+          type="text"
           placeholder={this.props.text}
           value={this.state.value}
           onChange={this.handleChange}
         />
-        <div className={styles.buttons + (this.state.visibleButtons ? ' ' + styles.buttonsShown : '')}>
-          <Button onClick={this.handleOK}>OK</Button>
-          <Button onClick={this.handleCancel} variant='danger'>cancel</Button>
+        <div className={ styles.buttons +(this.state.visibleButtons ? ' ' + styles.buttonsShown : '')}>
+          <Button onClick={this.handleOK}>{settings.creator.buttonOK}</Button>
+          <Button onClick={this.handleCancel} variant="danger">{settings.creator.buttonCancel}</Button>
         </div>
       </div>
     );
   }
 }
-
-export default Creator;
