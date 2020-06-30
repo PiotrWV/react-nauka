@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { settings } from '../../data/dataStore.js';
 
-class Creator extends React.Component {
+class Creator extends React.Component { //Błąd
   static propTypes = {
     text: PropTypes.string,
     action: PropTypes.func,
