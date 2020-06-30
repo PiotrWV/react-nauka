@@ -20,14 +20,14 @@ class Column extends React.Component {
   render() {
     const { title, icon, cards} = this.props;
     return (
-      <section className={styles.component}>
+     // <section className={styles.component}>
         <h3 className={styles.title}>
           {this.props.title}
           <span className={styles.icon}>
             <Icon name={this.props.icon} />
           </span>
         </h3>
-      
+        {/*
         <div className={styles.cards}>
           {this.state.cards.map(({ key, ...cardProps }) => (
             <Card key={key} {...cardProps} />
@@ -35,16 +35,16 @@ class Column extends React.Component {
         </div>
 
         <div className={styles.creator}>
-          {/*
+          
           <Creator
             text={settings.cardCreatorText}
             action={this.addCard.bind(this)}
           />
-          */}
+          
         </div>
       </section>
-          
-    );
+          */}
+       );
   }
 }
 export default Column;
