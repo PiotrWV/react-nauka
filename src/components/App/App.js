@@ -1,27 +1,31 @@
 import React from 'react';
+import Home from '../Home/HomeContainer';
+import Info from '../Info/Info';
+import Faq from '../Faq/Faq';
+import { BrowserRouter, Route } from 'react-router-dom';
+import MainLayout from '../MainLayout/MainLayout';
+import { AnimatedSwitch } from 'react-router-transition';
 import styles from './App.scss';
-import List from '../List/ListContainer.js';
-//import { pageContents, settings } from '../../data/dataStore';
-import PropTypes from 'prop-types';
+import List from '../List/ListContainer';
+import Search from '../SearchResult/SearchResultContainer';
 
-class App extends React.Component {
-  render() {
-    const {lists, title, subtitle} = this.props;
-    return (
-      <main className={styles.component}>
-        <h1 className={styles.title}>{title}</h1>
-        <h2 className={styles.subtitle}>{subtitle}</h2>
-        {lists.map(listData => (
-          <List key={listData.id} {...listData} />
-        ))}
-      </main>
-    );
-  }
-}
-App.propTypes = {
-  title: PropTypes.node,
-  subtitle: PropTypes.node,
-  lists: PropTypes.array
-};
+const App = () => (
+  <BrowserRouter>
+    <MainLayout>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+        className={styles.switchWrapper}
+      >
+        <Route exact path="/" component={Home} />
+        <Route exact path="/info" component={Info} />
+        <Route exact path="/faq" component={Faq} />
+        <Route exact path="/list/:id" component={List} />
+        <Route exact path="/search/:id" component={Search} />
+      </AnimatedSwitch>
+    </MainLayout>
+  </BrowserRouter>
+);
 
 export default App;
